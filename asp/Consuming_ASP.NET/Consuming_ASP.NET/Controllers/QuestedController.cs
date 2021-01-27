@@ -109,28 +109,52 @@ namespace Consuming_ASP.NET.Controllers
                 return View(score);
             }
         }
+        /*
         // POST: Quested/Create
-        /*[Microsoft.AspNetCore.Mvc.HttpPost]
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        
         public async Task<ActionResult<Questions>> Create([FromBody] Questions s)
         {
             try
             {
                 // TODO: Add insert logic here
+                s = new List<Questions>();
+                using (var client = new HttpClient())
+                {
+                    //Passing service base url  
+                    client.BaseAddress = new Uri(ip);
 
-                await _questionsService.Create(s);
-                return Microsoft.AspNetCore.Mvc.CreatedAtRoute("Get", new { id = s.question_id.ToString() }, s);
+                    client.DefaultRequestHeaders.Clear();
+                    //Define request data format  
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                    HttpResponseMessage Res = await client.GetAsync("api/scores/top");
+
+                    //Checking the response is successful or not which is sent using HttpClient  
+                    if (Res.IsSuccessStatusCode)
+                    {
+                        //Storing the response details recieved from web api   
+                        var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+                        //Deserializing the response recieved from web api and storing into the Employee list  
+                        //quested = JsonConvert.DeserializeObject<List<Score>>(EmpResponse);
+                        s = JsonConvert.DeserializeObject<List<Questions>>(EmpResponse);
+
+                    }
+                    return View(s);
+                }
 
             }
             catch
             {
-                return View();
             }
-        }*/
+        }
 
-        /*public ActionResult Score()
+        public ActionResult Score()
         {
             return View();
-        }*/
+        } */
 
         // GET: Quested/Edit/5
         public ActionResult Edit(int id)

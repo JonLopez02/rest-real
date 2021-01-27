@@ -3,18 +3,22 @@
     ViewBag.Title = "Index";
 }
 <div class="container row loginregister">
-    <div class="container col-lg-1 btn zootopia">@Html.ActionLink("Login", "Login"@*, "", null, new { @class = "btn" }*@)</div>
-    <div class="container col-lg-1 btn zootopia">@Html.ActionLink("Register", "Register")</div>
+
+    <a href="@Url.Action("Login", "Quested")"><div class="container col-lg-1 btn zootopia" style="font-size: 150%;">Login</div></a>
+    <a href="@Url.Action("Register", "Quested")"><div class="container col-lg-1 btn zootopia" style="font-size: 150%; width:auto;">Register</div></a>
+
 </div>
 
 <div class="container gorputza row">
-    <h1 class="zootopia" style="margin-left: 10%;
-        letter-spacing: 10px;
+    <h1 class="zootopia" style="    
+        text-align:center;
         margin-top: 10%;
-        font-size: 1000%;
-        color: #1789DF;
-        text-shadow: 7px 10px 45px gray;">QUESTED</h1>
-    <div class="btn zootopia" style="margin-left: 33%; padding: 2%; font-size: 150%; margin-top: 10%">@Html.ActionLink("LOGIN AND PLAY", "Login")</div>
-    <div class="btn zootopia" style="margin-left: 34.5%; padding: 2%; font-size: 150%; margin-top: 2%">@Html.ActionLink("HIGH SCORES", "Score")</div>
+        font-size: calc(4em + 4vw);
+        color: white;
+        text-shadow: 7px 10px 45px gray;">
+        QUESTED
+    </h1>
+    <a href="@Url.Action("Login", "Quested")"><div class="btn zootopia" style=" padding: 2%; font-size: 150%; margin: auto">Login and play</div></a>
+    <a href="@Url.Action("Score", "Quested")"><div class="btn zootopia" style=" padding: 2%; font-size: 150%; margin: auto;">Highscores</div></a>
 </div>
 

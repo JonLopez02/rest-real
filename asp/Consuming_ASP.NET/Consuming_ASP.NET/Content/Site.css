@@ -30,34 +30,34 @@ textarea {
 }
 
 .loginregister {
-    margin-left: 1100px;
+    margin-left: 80%;
 }
 
 .gorputza {
-    margin-top: 300px;
     margin: auto;
 }
 
 .btn {
     border: solid;
     border-radius: 25px;
-    border-color: #1789DF;
+    border-color: white;
     text-align: center;
     text-decoration: none;
-    color: black;
+    color: white;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
-    background-color: white;
-    margin: 5px;
+    margin: 1%;
+    max-width: initial;
 }
 
     .btn:hover {
         transition: 150ms;
         color: black;
-        background-color: #1789DF;
+        background-color: white;
+        border-color: black;
     }
 
 .padding {
-    padding: 6px
+    padding: 1.1%
 }
 
 .center {
@@ -71,12 +71,12 @@ textarea {
 }
 
 a {
-    color: #1789DF;
+    color: white;
     text-decoration: none;
 }
 
     a:hover {
-        color: white;
+        color: black;
         text-decoration: none;
     }
 
@@ -88,37 +88,35 @@ a {
 body {
     background-image: url("images/fondoa.jpg");
     background-repeat: repeat-y;
-    background-attachment: fixed;
-    background-size: auto;
+    background-size: cover;
     overflow-x: hidden;
 }
 
 .input {
-    color: #1789DF;
+    color: white;
 }
 
     .input:hover {
         transition: 150ms;
         color: white;
-        background-color: #1789DF;
+        background-color: white;
     }
 
 .highschore-div {
-    background-color: #1789DF;
     border: solid;
     border-radius: 25px;
     border-color: white;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     margin: 25px;
     min-height: 800%;
-    color: white;
     font-weight: bold;
     font-size: 500%;
-    padding: 10px;
+    padding: 2%;
+    color: white;
 }
 
 .block {
-    background-color: #1789DF;
+    background-color: white;
     border: solid;
     border-radius: 25px;
     border-color: white;
@@ -126,7 +124,7 @@ body {
     margin: 25px;
     min-height: 800%;
     color: white;
-    padding: 10px;
+    padding: 2%;
     width: 45%;
     margin-left: 20%;
     margin-top: 8%;
@@ -135,14 +133,14 @@ body {
 .info {
     font-size: 115%;
     font-weight: bold;
-    color: #1789DF;
+    color: white;
     margin-left: 1%;
 }
 
 .time {
     border: solid;
-    border-color: #1789DF;
-    background-color: #1789DF;
+    border-color: white;
+    background-color: white;
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -156,13 +154,13 @@ body {
 
 .points {
     border: solid;
-    border-color: #1789DF;
-    color: #1789DF;
+    border-color: white;
+    color: white;
     font-size: 300%;
     display: inline-block;
     width: 8%;
     margin-left: 24%;
-    padding: 10px;
+    padding: 2%;
     margin-top: -1%;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
@@ -170,21 +168,21 @@ body {
 
 .question {
     border: solid;
-    border-color: #1789DF;
+    border-color: white;
     border-radius: 30px;
     text-align: center;
     height: 20%;
     width: 70%;
     margin: 20px;
     padding: 10px;
-    color: #1789DF;
+    color: white;
     font-weight: bold;
     font-size: 200%;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
-.answer{
+.answer {
     width: 30%;
     margin-left: 5%;
 }

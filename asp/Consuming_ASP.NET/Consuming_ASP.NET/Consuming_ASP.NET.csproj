@@ -342,6 +342,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\images\banner.jpg" />
     <Content Include="Content\images\fevicon\fevicon.png" />
+    <Content Include="Content\images\fondoa.jpg" />
     <Content Include="Content\images\gradian_black.png" />
     <Content Include="Content\images\gradian_blue.png" />
     <Content Include="Content\images\it_service\1.jpg" />
@@ -400,7 +401,6 @@
     <Content Include="Content\images\loaders\loader_1.png" />
     <Content Include="Content\images\logos\it_logo.png" />
     <Content Include="Content\images\logos\it_logo_white.png" />
-    <Content Include="Content\images\fondoa.jpg" />
     <Content Include="Content\images\pic01.jpg" />
     <Content Include="Content\images\pic02.jpg" />
     <Content Include="Content\images\pic03.jpg" />

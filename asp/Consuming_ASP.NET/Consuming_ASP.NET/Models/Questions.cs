@@ -13,8 +13,12 @@ namespace Consuming_ASP.NET.Models
         public string difficulty { get; set; }
         public string question { get; set; }
         public string correct_answer { get; set; }
-        public List<String> incorrect_answers { get; set; }
+        public String[] incorrect_answers { get; set; }
         public bool available { get; set; }
 
+        public static implicit operator Questions(List<Questions> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -109,15 +109,16 @@ namespace Consuming_ASP.NET.Controllers
                 return View(score);
             }
         }
-        /*
+        /**/
         // POST: Quested/Create
         [Microsoft.AspNetCore.Mvc.HttpPost]
-        
-        public async Task<ActionResult<Questions>> Create([FromBody] Questions s)
+
+        public async Task<ActionResult> Create(System.Web.Mvc.FormCollection collection)
         {
             try
             {
                 // TODO: Add insert logic here
+                List<Questions> s;
                 s = new List<Questions>();
                 using (var client = new HttpClient())
                 {
@@ -127,34 +128,40 @@ namespace Consuming_ASP.NET.Controllers
                     client.DefaultRequestHeaders.Clear();
                     //Define request data format  
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    Questions question = new Questions();
+                    question.question_id = int.Parse(collection["question_id"]);
+                    question.question = collection["question"];
+                    question.type = collection["type"];
+                    question.difficulty = collection["difficulty"];
+                    //question.available = collection["true"];
+                    question.category = collection["category"];
+                    question.correct_answer = collection["correct_answer"];
+                    question.incorrect_answers = collection["incorrect_answers"].Split(',');
+
+
+                    var questionjson = JsonConvert.SerializeObject(question);
+
+                    HttpContent data = new StringContent(questionjson);
 
                     //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
-                    HttpResponseMessage Res = await client.GetAsync("api/scores/top");
+                    await client.PostAsync("api/question", data);
 
-                    //Checking the response is successful or not which is sent using HttpClient  
-                    if (Res.IsSuccessStatusCode)
-                    {
-                        //Storing the response details recieved from web api   
-                        var EmpResponse = Res.Content.ReadAsStringAsync().Result;
-
-                        //Deserializing the response recieved from web api and storing into the Employee list  
-                        //quested = JsonConvert.DeserializeObject<List<Score>>(EmpResponse);
-                        s = JsonConvert.DeserializeObject<List<Questions>>(EmpResponse);
-
-                    }
-                    return View(s);
                 }
-
             }
             catch
             {
             }
+
+            return RedirectToAction("../Home/Index");
+
+        }
+        public async System.Threading.Tasks.Task<ActionResult> CreateForm()
+        {
+
+            return View();
         }
 
-        public ActionResult Score()
-        {
-            return View();
-        } */
+
 
         // GET: Quested/Edit/5
         public ActionResult Edit(int id)

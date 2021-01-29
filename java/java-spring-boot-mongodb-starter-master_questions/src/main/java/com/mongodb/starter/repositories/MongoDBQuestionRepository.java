@@ -53,6 +53,7 @@ public class MongoDBQuestionRepository implements QuestionRepository {
                 max_id = id;
             }
         }
+        question.setAvailable(false);
         question.setQuestion_id(max_id + 1);
         questionCollection.insertOne(question);
         return question;
@@ -81,6 +82,11 @@ public class MongoDBQuestionRepository implements QuestionRepository {
     @Override
     public List<Question> findUnavailable() {
         return questionCollection.find(in("available", false)).into(new ArrayList<>());
+    }
+    
+    @Override
+    public List<Question> findAvailable() {
+        return questionCollection.find(in("available", true)).into(new ArrayList<>());
     }
     
     @Override

@@ -29,4 +29,6 @@ public interface QuestionRepository {
     List<Question> findAllDifficulty(String difficulty);
     
     List<Question> findUnavailable();
+    
+    List<Question> findAvailable();
 }

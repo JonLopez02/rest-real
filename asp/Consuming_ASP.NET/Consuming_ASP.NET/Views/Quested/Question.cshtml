@@ -5,12 +5,16 @@
 }
 @*@model IEnumerable<Consuming_ASP.NET.Models.Questions>*@
 
-<div class="container" style="margin-top: 10%; margin-left: 10%">
-    <div class="row">
-        <div class="col-lg-4 info">Cultura general<br />Logica<br />Dificil</div>
-        <div class="col-lg-4 time">
+<div class="question_container">
+    <div class="Row">
 
-            <p id="secs" style="margin-top:-10%; margin-left: -25%; text-align: center;"></p>
+
+        <div class="info"></div>
+
+
+        <div class="Column time">
+
+            <p id="secs" style="margin: auto; text-align: center;"></p>
             <script>
                 // The data/time we want to countdown to
                 var countDownDate = new Date("Jul 25, 2021 16:37:52").getTime();
@@ -31,24 +35,28 @@
                     // Display the message when countdown is over
                     if (timeleft < 0) {
                         clearInterval(myfunc);
-                        document.getElementById("secs").innerHTML = ""
+                        document.getElementById("secs").innerHTML = "Time out!"
                     }
                 }, 1000);
             </script>
         </div>
-        <div class="col-lg-4 points">420</div>
+
+
+        <div class="Column points">420</div>
+
+
     </div>
-    <div class="row">
-        <div class="col-lg-12 question">Quien es el mejor tonto de clase? </div>
+    <div>
+        <div class="question">Quien es el mejor tonto de clase? </div>
     </div>
-    <div class="row">
-        <div class="row">
-            <div class="col-lg-6 btn answer">A. Markel</div>
-            <div class="col-lg-6 btn answer">B. Markel</div>
+    <div>
+        <div class="question_row">
+            <div class="btn answer">A. Markel</div>
+            <div class="btn answer">B. Markel</div>
         </div>
-        <div class="row">
-            <div class="col-lg-6 btn answer">C. Alvaro</div>
-            <div class="col-lg-6 btn answer">D. Joseba</div>
+        <div class="question_row">
+            <div class="btn answer">C. Alvaro</div>
+            <div class="btn answer">D. Joseba</div>
         </div>
     </div>
 </div>

@@ -1,24 +1,26 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
-<div class="container row loginregister">
+﻿<head runat="server">
+    <link href="StyleSheet.css" rel="stylesheet" type="text/css" />
+</head>
+    @{
+        ViewBag.Title = "Index";
+    }
+    <div class="container row loginregister">
 
-    <a href="@Url.Action("Login", "Quested")"><div class="container col-lg-1 btn zootopia" style="font-size: 150%;">Login</div></a>
-    <a href="@Url.Action("Register", "Quested")"><div class="container col-lg-1 btn zootopia" style="font-size: 150%; width:auto;">Register</div></a>
+        <a href="@Url.Action("Login", "Quested")"><div class="container col-lg-1 btn zootopia" style="font-size: 150%;">Login</div></a>
+        <a href="@Url.Action("Register", "Quested")"><div class="container col-lg-1 btn zootopia" style="font-size: 150%; width:auto;">Register</div></a>
 
-</div>
+    </div>
 
-<div class="container gorputza row">
-    <h1 class="zootopia" style="    
+    <div class="container gorputza row center">
+        <h1 class="zootopia" style="
         text-align:center;
-        margin-top: 10%;
         font-size: calc(4em + 4vw);
         color: white;
         text-shadow: 7px 10px 45px gray;">
-        QUESTED
-    </h1>
-    <a href="@Url.Action("Login", "Quested")"><div class="btn zootopia" style=" padding: 2%; font-size: 150%; margin: auto">Login and play</div></a>
-    <a href="@Url.Action("Score", "Quested")"><div class="btn zootopia" style=" padding: 2%; font-size: 150%; margin: auto;">Highscores</div></a>
-</div>
+            QUESTED
+        </h1>
+        <a href="@Url.Action("Login", "Quested")"><div class="btn zootopia" style=" padding: 2%; font-size: 150%; margin: auto">Login and play</div></a>
+        <br />
+        <a href="@Url.Action("Score", "Quested")"><div class="btn zootopia" style=" padding: 2%; font-size: 150%; margin: auto;">Highscores</div></a>
+    </div>
 

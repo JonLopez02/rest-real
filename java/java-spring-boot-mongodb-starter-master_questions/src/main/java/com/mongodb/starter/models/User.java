@@ -19,7 +19,6 @@ import org.bson.types.ObjectId;
 public class User {
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private ObjectId id;
     private int user_id;
     private String role;
     private String name;
@@ -28,15 +27,6 @@ public class User {
     private int highScore;
     private String nickname;
     private String password;
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public User setId(ObjectId id) {
-        this.id = id;
-        return this;
-    }
 
     public int getUser_id() {
         return user_id;
@@ -112,7 +102,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", user_id=" + user_id + ", role=" + role + ", name=" + name + ", surname=" + surname + ", email=" + email + ", highScore=" + highScore + ", nickname=" + nickname + ", password=" + password + '}';
+        return "User{" + "user_id=" + user_id + ", role=" + role + ", name=" + name + ", surname=" + surname + ", email=" + email + ", highScore=" + highScore + ", nickname=" + nickname + ", password=" + password + '}';
     }
 
     @Override
@@ -151,9 +141,6 @@ public class User {
         if (!Objects.equals(this.password, other.password)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
         return true;
     }
     
@@ -161,7 +148,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user_id, highScore, role, name, surname, email, nickname, password);
+        return Objects.hash(user_id, highScore, role, name, surname, email, nickname, password);
     }
 
 }

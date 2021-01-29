@@ -20,20 +20,9 @@ import org.bson.types.ObjectId;
 public class Score {
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private ObjectId id;
     private int score_id;
     private int score;
     private String nickname;
-
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public Score setId(ObjectId id) {
-        this.id = id;
-        return this;
-    }
 
     public int getScore_id() {
         return score_id;
@@ -64,7 +53,7 @@ public class Score {
 
     @Override
     public String toString() {
-        return "Scoreboard{" + "id=" + id + ", score_id=" + score_id + ", score=" + score + ", user=" + nickname + '}';
+        return "Scoreboard{" + "score_id=" + score_id + ", score=" + score + ", user=" + nickname + '}';
     }
 
     @Override
@@ -85,9 +74,6 @@ public class Score {
         if (this.score != other.score) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
         if (!Objects.equals(this.nickname, other.nickname)) {
             return false;
         }
@@ -97,7 +83,7 @@ public class Score {
     
     @Override
     public int hashCode() {
-        return Objects.hash(id, score_id, score, nickname);
+        return Objects.hash(score_id, score, nickname);
     }
 
 }

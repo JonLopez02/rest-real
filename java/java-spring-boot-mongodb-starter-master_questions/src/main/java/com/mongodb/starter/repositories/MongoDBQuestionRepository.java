@@ -45,7 +45,6 @@ public class MongoDBQuestionRepository implements QuestionRepository {
 
     @Override
     public Question save(Question question) {
-        question.setId(new ObjectId());
         List<Question> questions = findAll();
         int max_id = 0, id;
         for (Question quest : questions){
@@ -109,9 +108,9 @@ public class MongoDBQuestionRepository implements QuestionRepository {
     }
 
     @Override
-    public Question update(Question person) {
+    public Question update(Question question) {
         FindOneAndReplaceOptions options = new FindOneAndReplaceOptions().returnDocument(AFTER);
-        return questionCollection.findOneAndReplace(eq("_id", person.getId()), person, options);
+        return questionCollection.findOneAndReplace(eq("question_id", question.getQuestion_id()), question, options);
     }
 
     private List<ObjectId> mapToObjectIds(List<String> ids) {

@@ -55,8 +55,19 @@ public class MongoDBQuestionRepository implements QuestionRepository {
         }
         question.setAvailable(false);
         question.setQuestion_id(max_id + 1);
-        questionCollection.insertOne(question);
-        return question;
+        if(question.getType().equals("boolean")){
+            if(question.getIncorrect_answers().size() == 1
+                    ){
+                questionCollection.insertOne(question);
+                return question;                
+            }
+        } else if (question.getType().equals("multiple")) {
+            if(question.getIncorrect_answers().size() == 3){
+                questionCollection.insertOne(question);
+                return question;                
+            }
+        }
+        return null;
     }
 
     @Override

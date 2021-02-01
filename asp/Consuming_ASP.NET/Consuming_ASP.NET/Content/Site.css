@@ -30,7 +30,7 @@ textarea {
 }
 
 .loginregister {
-    margin-left: 80%;
+    float: left;
 }
 
 .gorputza {
@@ -109,6 +109,7 @@ body {
     border-color: white;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     margin: 25px;
+    width:auto;
     min-height: 800%;
     font-weight: bold;
     font-size: 500%;
@@ -204,5 +205,19 @@ body {
 
 .question_row {
     margin: auto;
+}
+
+.index_container{
+    margin: auto;
+    align-content: center;
+}
+
+.index_div {
+   padding: 2%; 
+   font-size: 150%; 
+   margin: auto;
+   width: 30%;
+   margin-left:35%;
+    margin-top:3%;
 }
 

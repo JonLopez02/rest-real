@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Consuming_ASP.NET.Models.Questions>
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -9,11 +10,8 @@
 </div>
 
 <div class="row">
-    
+
 </div>
-
-
-@model IEnumerable<Consuming_ASP.NET.Models.Questions>
 
 
 <p>
@@ -43,6 +41,9 @@
         <th>
             @Html.DisplayNameFor(model => model.incorrect_answers)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.available)
+        </th>
         <th></th>
     </tr>
 
@@ -69,6 +70,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.incorrect_answers)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.available);
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ })

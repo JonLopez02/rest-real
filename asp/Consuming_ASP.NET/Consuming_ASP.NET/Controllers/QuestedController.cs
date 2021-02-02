@@ -2,12 +2,14 @@
 using Consuming_ASP.NET.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -35,7 +37,7 @@ namespace Consuming_ASP.NET.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
-                HttpResponseMessage Res = await client.GetAsync("?age=25");
+                HttpResponseMessage Res = await client.GetAsync("api/quesiton");
 
                 //Checking the response is successful or not which is sent using HttpClient  
                 if (Res.IsSuccessStatusCode)
@@ -57,14 +59,58 @@ namespace Consuming_ASP.NET.Controllers
             return View();
         }
 
-        public ActionResult Register()
+        public ActionResult Register(System.Web.Mvc.FormCollection collection)
         {
-            return View();
+            /*var Connection = "mongodb://192.168.72.3";
+            var client = new MongoClient(Connection);
+            var Db = client.GetDatabase("Demo1");
+            var Collection = Db.GetCollection<User>("User");
+            User na = new User();
+            na.name = collection["name"];
+            na.password = collection["password"];
+
+            Collection.InsertOneAsync(na);*/
+
+
+
+            var postTask = client.PostAsJsonAsync<Questions>("api/user", na);
+            postTask.Wait();
+            var Res = postTask.Result;
+            var result = postTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
             //var credential = MongoCredential.
         }
-        public ActionResult Question()
+        public async Task<ActionResult> Question()
         {
-            return View();
+
+            List<Questions> quested = new List<Questions>();
+            using (var client = new HttpClient())
+            {
+                //Passing service base url  
+                client.BaseAddress = new Uri(ip);
+
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format  
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                HttpResponseMessage Res = await client.GetAsync("api/quesiton");
+
+                //Checking the response is successful or not which is sent using HttpClient  
+                if (Res.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api   
+                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+                    //Deserializing the response recieved from web api and storing into the Employee list  
+                    quested = JsonConvert.DeserializeObject<List<Questions>>(EmpResponse);
+
+                }
+                return View(quested);
+            }
         }
 
 
@@ -112,8 +158,8 @@ namespace Consuming_ASP.NET.Controllers
         /**/
         // POST: Quested/Create
         [Microsoft.AspNetCore.Mvc.HttpPost]
-
-        public async Task<ActionResult> Create(System.Web.Mvc.FormCollection collection)
+        [System.Web.Mvc.HttpPost]
+        public ActionResult Create(System.Web.Mvc.FormCollection collection)
         {
             try
             {
@@ -123,29 +169,67 @@ namespace Consuming_ASP.NET.Controllers
                 using (var client = new HttpClient())
                 {
                     //Passing service base url  
-                    client.BaseAddress = new Uri(ip);
+                    //client.BaseAddress = new Uri(ip);
 
                     client.DefaultRequestHeaders.Clear();
                     //Define request data format  
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    Questions question = new Questions();
-                    question.question_id = int.Parse(collection["question_id"]);
-                    question.question = collection["question"];
-                    question.type = collection["type"];
-                    question.difficulty = collection["difficulty"];
+
+                    String category_ = collection["category"];
+                    String type_ = collection["type"];
+                    String difficulty_ = collection["difficulty"];
+                    String question_ = collection["question"];
+                    String correct_answer_ = collection["correct_answer"];
+                    //String[] incorrect_answers = collection["incorrect_answers[0]"].Split(',');
+                    String[] incorrect_answers_ = new String[3];
+
+                    try
+                    {
+
+                        if (collection["incorrect_answers[1]"] == null && collection["incorrect_answers[2]"] == null)
+                        {
+                            incorrect_answers_[0] = collection["incorrect_answers[0]"];
+                        }
+                        else if (collection["incorrect_answers[1]"] == null)
+                        {
+                            incorrect_answers_[0] = collection["incorrect_answers[0]"];
+                        }
+                        else if (collection["incorrect_answers[2]"] == null)
+                        {
+                            incorrect_answers_[0] = collection["incorrect_answers[0]"];
+                        }
+                        else if (collection["incorrect_answers[0]"] != null && collection["incorrect_answers[1]"] != null && collection["incorrect_answers[2]"] != null)
+                        {
+                            incorrect_answers_[0] = collection["incorrect_answers[0]"];
+                            incorrect_answers_[1] = collection["incorrect_answers[1]"];
+                            incorrect_answers_[2] = collection["incorrect_answers[2]"];
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                    }
+
+
+                    Questions question = new Questions(category_, type_, difficulty_, question_, correct_answer_, incorrect_answers_, true);
+                    //question.incorrect_answers = collection["incorrect_answers"].ToString().Split(',');
                     //question.available = collection["true"];
-                    question.category = collection["category"];
-                    question.correct_answer = collection["correct_answer"];
-                    question.incorrect_answers = collection["incorrect_answers"].Split(',');
 
+                    client.BaseAddress = new Uri(ip);
 
-                    var questionjson = JsonConvert.SerializeObject(question);
+                    //HTTP POST
+                    var postTask = client.PostAsJsonAsync<Questions>("api/question", question);
+                    postTask.Wait();
+                    var Res = postTask.Result;
+                    var result = postTask.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Index");
+                    }
 
-                    HttpContent data = new StringContent(questionjson);
+                    //HttpContent data = new StringContent(questionjson);
 
                     //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
-                    await client.PostAsync("api/question", data);
-
+                    //await client.PostAsync("api/question", question);
                 }
             }
             catch

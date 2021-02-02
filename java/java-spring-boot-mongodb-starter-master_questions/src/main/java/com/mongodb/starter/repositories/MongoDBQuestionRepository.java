@@ -45,7 +45,6 @@ public class MongoDBQuestionRepository implements QuestionRepository {
 
     @Override
     public Question save(Question question) {
-        question.setId(new ObjectId());
         List<Question> questions = findAll();
         int max_id = 0, id;
         for (Question quest : questions){
@@ -54,9 +53,21 @@ public class MongoDBQuestionRepository implements QuestionRepository {
                 max_id = id;
             }
         }
+        question.setAvailable(false);
         question.setQuestion_id(max_id + 1);
-        questionCollection.insertOne(question);
-        return question;
+        if(question.getType().equals("boolean")){
+            if(question.getIncorrect_answers().size() == 1
+                    ){
+                questionCollection.insertOne(question);
+                return question;                
+            }
+        } else if (question.getType().equals("multiple")) {
+            if(question.getIncorrect_answers().size() == 3){
+                questionCollection.insertOne(question);
+                return question;                
+            }
+        }
+        return null;
     }
 
     @Override
@@ -85,6 +96,11 @@ public class MongoDBQuestionRepository implements QuestionRepository {
     }
     
     @Override
+    public List<Question> findAvailable() {
+        return questionCollection.find(in("available", true)).into(new ArrayList<>());
+    }
+    
+    @Override
     public Question findOne(int question_id) {
         return questionCollection.find(eq("question_id", question_id)).first();
     }
@@ -109,9 +125,9 @@ public class MongoDBQuestionRepository implements QuestionRepository {
     }
 
     @Override
-    public Question update(Question person) {
+    public Question update(Question question) {
         FindOneAndReplaceOptions options = new FindOneAndReplaceOptions().returnDocument(AFTER);
-        return questionCollection.findOneAndReplace(eq("_id", person.getId()), person, options);
+        return questionCollection.findOneAndReplace(eq("question_id", question.getQuestion_id()), question, options);
     }
 
     private List<ObjectId> mapToObjectIds(List<String> ids) {

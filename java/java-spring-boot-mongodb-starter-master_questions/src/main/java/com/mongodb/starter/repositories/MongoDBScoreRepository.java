@@ -47,7 +47,6 @@ public class MongoDBScoreRepository implements ScoreRepository {
 
     @Override
     public Score save(Score score) {
-        score.setId(new ObjectId());
         List<Score> scores = findAll();
         int max_id = 0, id;
         for (Score sc : scores){
@@ -87,9 +86,9 @@ public class MongoDBScoreRepository implements ScoreRepository {
     }
 
     @Override
-    public Score update(Score person) {
+    public Score update(Score score) {
         FindOneAndReplaceOptions options = new FindOneAndReplaceOptions().returnDocument(AFTER);
-        return scoreCollection.findOneAndReplace(eq("_id", person.getId()), person, options);
+        return scoreCollection.findOneAndReplace(eq("score_id", score.getScore_id()), score, options);
     }
 
     private List<ObjectId> mapToObjectIds(List<String> ids) {

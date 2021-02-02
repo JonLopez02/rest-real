@@ -44,7 +44,6 @@ public class MongoDBUserRepository implements UserRepository {
 
     @Override
     public User save(User user) {
-        user.setId(new ObjectId());
         List<User> users = findAll();
         int max_id = 0, id;
         for (User usuario : users){
@@ -79,9 +78,9 @@ public class MongoDBUserRepository implements UserRepository {
     }
 
     @Override
-    public User update(User person) {
+    public User update(User user) {
         FindOneAndReplaceOptions options = new FindOneAndReplaceOptions().returnDocument(AFTER);
-        return userCollection.findOneAndReplace(eq("_id", person.getId()), person, options);
+        return userCollection.findOneAndReplace(eq("user_id", user.getUser_id()), user, options);
     }
 
     private List<ObjectId> mapToObjectIds(List<String> ids) {

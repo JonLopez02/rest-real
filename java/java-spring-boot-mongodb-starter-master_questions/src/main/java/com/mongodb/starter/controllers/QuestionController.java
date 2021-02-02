@@ -53,6 +53,11 @@ public class QuestionController {
     public List<Question> getQuestionUnavailable() {
         return questionRepository.findUnavailable();
     }
+    
+    @GetMapping("questions/available")
+    public List<Question> getQuestionAvailable() {
+        return questionRepository.findAvailable();
+    }
 
     @GetMapping("question/{question_id}")
     public ResponseEntity<Question> getQuestion(@PathVariable int question_id) {

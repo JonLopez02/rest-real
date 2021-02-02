@@ -20,7 +20,6 @@ import org.bson.types.ObjectId;
 public class Question {
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private ObjectId id;
     private int question_id;
     private String category;
     private String type;
@@ -29,15 +28,6 @@ public class Question {
     private String correct_answer;
     private List<String> incorrect_answers;
     private boolean available;
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public Question setId(ObjectId id) {
-        this.id = id;
-        return this;
-    }
 
     public int getQuestion_id() {
         return question_id;
@@ -112,7 +102,7 @@ public class Question {
 
     @Override
     public String toString() {
-        return "Question{" + "id=" + id + ", question_id=" + question_id + ", category=" + category + ", type=" + type + ", difficulty=" + difficulty + ", question=" + question + ", correct_answer=" + correct_answer + ", incorrect_answers=" + incorrect_answers + ", available=" + available + '}';
+        return "Question{" + "question_id=" + question_id + ", category=" + category + ", type=" + type + ", difficulty=" + difficulty + ", question=" + question + ", correct_answer=" + correct_answer + ", incorrect_answers=" + incorrect_answers + ", available=" + available + '}';
     }
 
     @Override
@@ -145,9 +135,7 @@ public class Question {
         if (!Objects.equals(this.correct_answer, other.correct_answer)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
+
         if (!Objects.equals(this.incorrect_answers, other.incorrect_answers)) {
             return false;
         }
@@ -162,7 +150,7 @@ public class Question {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, question_id, category, type, difficulty, question, correct_answer, incorrect_answers, available);
+        return Objects.hash(question_id, category, type, difficulty, question, correct_answer, incorrect_answers, available);
     }
 
 }
